@@ -187,13 +187,13 @@ export const ScratchCard: FC<{
 
   const draw = useCallback(
     (event: MouseEvent | TouchEvent) => {
-      event.preventDefault();
       if (
         !isDrawingRef.current ||
         autoRevealedRef.current ||
         !canvasRef.current
       )
         return;
+      event.preventDefault();
       const ctx = canvasRef.current.getContext("2d");
       const newPosition = getMousePosition(canvasRef.current, event);
       if (ctx) {

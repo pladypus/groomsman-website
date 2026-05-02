@@ -1,12 +1,10 @@
 import YugiohCard from "~/components/yugioh-card";
 import type { Viewport } from "next";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
+// export const viewport: Viewport = {
+//   width: "device-width",
+//   initialScale: 1,
+// };
 
 const GroomsmenPage = () => {
   return (

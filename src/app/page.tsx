@@ -1,8 +1,37 @@
-export default function Home() {
+import Link from "next/link";
+
+const GroomsmanHand = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between text-center p-24 bg-pink-500">
-      <p className="text-5xl">Happy Anniversary!!!!!</p>
-      <p className="text-5xl">Love you SOOOOOOOO much</p>
-    </main>
+    <>
+      <h1>See My Hand</h1>
+      <ul className="grid grid-cols-3 gap-4 mx-6">
+        <li>
+          <Link
+            className="block rounded-lg bg-white dark:bg-gray-700 p-6 shadow-gray transform border border-transparent transition-transform duration-300 ease-out hover:scale-[1.02] hover:border-gray-300 hover:shadow-md"
+            href="/best-man-of-the-eternal-jar"
+          >
+            John
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="block rounded-lg bg-white dark:bg-gray-700 p-6 shadow-gray transform border border-transparent transition-transform duration-300 ease-out hover:scale-[1.02] hover:border-gray-300 hover:shadow-md"
+            href="/groomsman-of-the-silver-chain"
+          >
+            Nick
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="block rounded-lg bg-white dark:bg-gray-700 p-6 shadow-gray transform border border-transparent transition-transform duration-300 ease-out hover:scale-[1.02] hover:border-gray-300 hover:shadow-md"
+            href="/the-legendary-milf-hunter-groomsman"
+          >
+            Kevin
+          </Link>
+        </li>
+      </ul>
+    </>
   );
-}
+};
+
+export default GroomsmanHand;

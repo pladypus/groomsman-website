@@ -3,7 +3,7 @@ import YugiohCard from "~/components/yugioh-card";
 const GroomsmenPage = () => {
   return (
     <div>
-      <h1>Groomsmen</h1>
+      <h1 className="text-2xl font-bold">Bitch you knew this was coming</h1>
       <div className="bg-slate-500 p-10">
         <YugiohCard />
       </div>

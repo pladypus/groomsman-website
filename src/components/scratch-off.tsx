@@ -30,6 +30,7 @@ export const ScratchCard: FC<{
   onComplete?: () => void;
   brushSize?: number;
   children?: ReactNode;
+  color?: string;
 }> = ({
   width = 300,
   height = 150,
@@ -38,6 +39,7 @@ export const ScratchCard: FC<{
   onComplete = () => {},
   brushSize = 30,
   children,
+  color,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparkCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -235,7 +237,7 @@ export const ScratchCard: FC<{
         };
         bg.onerror = () => console.error("Failed to load image");
       } else {
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = color ?? "#000";
         ctx.fillRect(0, 0, width, height);
         setCanvasLoaded(true);
       }

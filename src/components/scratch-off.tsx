@@ -160,7 +160,12 @@ export const ScratchCard: FC<{
   };
 
   const startDrawing = useCallback((event: MouseEvent | TouchEvent) => {
-    event.preventDefault();
+    const ctx = canvasRef.current?.getContext("2d");
+    const imageData = ctx?.getImageData(0, 0, width, height);
+    const pct = getClearedCanvasPercentage(imageData?.data, width, height);
+    if (pct < finishPercent) {
+      event.preventDefault();
+    }
     isDrawingRef.current = true;
     lastPositionRef.current = getMousePosition(canvasRef.current, event);
   }, []);
@@ -168,12 +173,13 @@ export const ScratchCard: FC<{
   const checkReveal = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       const imageData = ctx.getImageData(0, 0, width, height);
-      const pixels = imageData.data;
-      let transparentPixels = 0;
-      for (let i = 0; i < pixels.length; i += 4) {
-        if (pixels[i + 3] === 0) transparentPixels++;
-      }
-      const pct = (transparentPixels / (width * height)) * 100;
+      const pct = getClearedCanvasPercentage(imageData.data, width, height);
+      // const pixels = imageData.data;
+      // let transparentPixels = 0;
+      // for (let i = 0; i < pixels.length; i += 4) {
+      //   if (pixels[i + 3] === 0) transparentPixels++;
+      // }
+      // const pct = (transparentPixels / (width * height)) * 100;
       if (pct >= finishPercent && !autoRevealedRef.current) {
         autoRevealedRef.current = true;
         ctx.clearRect(0, 0, width, height);
@@ -284,4 +290,18 @@ export const ScratchCard: FC<{
       )}
     </div>
   );
+};
+
+const getClearedCanvasPercentage = (
+  pixels: ImageDataArray | undefined,
+  width: number,
+  height: number,
+) => {
+  if (!pixels) return 0;
+  let transparentPixels = 0;
+  for (let i = 0; i < pixels.length; i += 4) {
+    if (pixels[i + 3] === 0) transparentPixels++;
+  }
+  const pct = (transparentPixels / (width * height)) * 100;
+  return pct;
 };

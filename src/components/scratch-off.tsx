@@ -160,6 +160,7 @@ export const ScratchCard: FC<{
   };
 
   const startDrawing = useCallback((event: MouseEvent | TouchEvent) => {
+    event.preventDefault();
     isDrawingRef.current = true;
     lastPositionRef.current = getMousePosition(canvasRef.current, event);
   }, []);
@@ -186,6 +187,7 @@ export const ScratchCard: FC<{
 
   const draw = useCallback(
     (event: MouseEvent | TouchEvent) => {
+      event.preventDefault();
       if (
         !isDrawingRef.current ||
         autoRevealedRef.current ||
@@ -245,8 +247,8 @@ export const ScratchCard: FC<{
       canvas.addEventListener("mousemove", draw);
       canvas.addEventListener("mouseup", stopDrawing);
       canvas.addEventListener("mouseout", stopDrawing);
-      canvas.addEventListener("touchstart", startDrawing);
-      canvas.addEventListener("touchmove", draw);
+      canvas.addEventListener("touchstart", startDrawing, { passive: false });
+      canvas.addEventListener("touchmove", draw, { passive: false });
       canvas.addEventListener("touchend", stopDrawing);
     }
     return () => {
